@@ -1,12 +1,14 @@
 import React from 'react';
+//Styles
 import './App.css';
-
+//Components
+import Header from "./components/header.js"
+import Home from './containers/home.js'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Weather App</h2>
-      </header>
+    <div className="SiteWrapper">
+      <Header/>
+      <Home/>
     </div>
   );
 }
