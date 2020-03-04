@@ -15,25 +15,35 @@
   text-align:center;
 }
 
+.cityName{
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size:86px;
+  line-height: 86px;
+}
+
 .WeatherInfo{
   display:flex;
   flex-direction:column;
   flex-wrap:nowrap;
   text-align:center;
 }
-
+/*the p is there to override the browsers styling*/
 .WeatherInfo .CurrentTemp p{
-  font-size: 96px;
-  line-height:96px;
   margin:0px;
 }
 
+/*the p is there to override the browsers styling*/
 .WeatherInfo .CurrentTempLabel{
-  text-align: center;
-  text-transform: uppercase;
-  font-size:86px;
+  font-size:76px;
 }
 
-.WeatherInfo .OtherTemp p{
+.WeatherInfo .CurrentTempNumber{
+  font-size:76px;
+  color:#5f6878;
+}
 
+.WeatherInfo strong{
+  color: #5f6878;
+  font-weight: bold;
 }
