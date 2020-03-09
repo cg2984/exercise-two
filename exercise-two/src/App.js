@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 //Styles
 import './App.css';
 //Components
@@ -8,7 +9,13 @@ function App() {
   return (
     <div className="SiteWrapper">
       <Header/>
-      <Home/>
+      <Router>
+      	<Switch>
+      		<Route path="/">
+      		<Home/>
+      		</Route>
+      	</Switch>
+      </Router>
     </div>
   );
 }

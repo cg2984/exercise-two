@@ -47,3 +47,12 @@
   color: #5f6878;
   font-weight: bold;
 }
+
+.CitiesNav .active{
+  color:green;
+}
+
+.CitiesNav a{
+  border-bottom:1px solid transparent;
+  transition: ;
+}
