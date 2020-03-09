@@ -23,7 +23,7 @@ function Home(){
 	const[curTemp,setCurTemp] = useState('');
 	const[hiTemp,setHiTemp] = useState('');
 	const[loTemp,setLoTemp] = useState('');
-	const[humidity,setHumidity] = useState('')
+	const[humidity,setHumidity] = useState('');
 	const[clouds,setClouds] = useState(0);
 
 
@@ -61,7 +61,10 @@ function Home(){
 	//if there is nothing in the brackets than the useEffects will only update once
 	}, [city]);
 	
-	
+	function kevlvinConvert(kelvin){
+		let newNum = (kelvin-273.15)*(9/5)+32
+		return newNum
+	};
 
 	//these are for ensuring that the data is loaded before the website tries to use it
 	useEffect(() => {
@@ -75,7 +78,7 @@ function Home(){
 			setClouds(cloudVal);
 		}
 	},[weatherData]);
-
+	let newCurTemp = kevlvinConvert(curTemp);
 	console.log("weather data", weatherData);
 	return (
 		<div className="Home">
@@ -83,7 +86,7 @@ function Home(){
 			<div className="WeatherInfo">
 				<div className='CurrentTemp'>
 					<p className = "CurrentTempLabel">Current Temperature</p>
-					<p className = 'CurrentTempNumber'>{curTemp}&#176;</p>
+					<p className = 'CurrentTempNumber'>{newCurTemp}&#176;</p>
 				</div>
 				<div className='OtherTemp'>
 					<p>High Temp: <strong>{hiTemp}&#176;</strong></p>
