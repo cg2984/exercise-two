@@ -1,7 +1,7 @@
-import React, {useEffect,useState} from 'react'
-import axios from 'axios'
-import { useHistory } from "react-router-dom"
-import WeatherImage from 'weatherImage.js'
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import WeatherImage from './weatherImage.js';
 
 //API Keys
 const defaultKey = '28a8f4bb10179b820b9c760bc2c7a3f5'
@@ -20,14 +20,14 @@ function Home(){
 
 //-------USE STATES VARIABLES-----------------------------------------------------------
 	//all the states thave have to be tracked. most of them the default value is an empty string 
-	const [city,setCity] = useState('');
-	const[curTemp,setCurTemp] = useState('');
-	const[hiTemp,setHiTemp] = useState('');
-	const[loTemp,setLoTemp] = useState('');
-	const[humidity,setHumidity] = useState('');
-	const[clouds,setClouds] = useState(0);
-	const[weatherType, setWeatherType] = useState("Clear");
-	const [weatherData, setWeatherData] = useState({});
+const [city,setCity] = useState('');
+const[curTemp,setCurTemp] = useState('');
+const[hiTemp,setHiTemp] = useState('');
+const[loTemp,setLoTemp] = useState('');
+const[humidity,setHumidity] = useState('');
+const[clouds,setClouds] = useState(0);
+const[weatherType, setWeatherType] = useState("Clear");
+const [weatherData, setWeatherData] = useState({});
 
 
 
