@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react'
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
+import WeatherImage from 'weatherImage.js'
 
 //API Keys
 const defaultKey = '28a8f4bb10179b820b9c760bc2c7a3f5'
@@ -15,7 +16,7 @@ function Home(){
 
 	//this is the default version of the weather data so that we have somewhere to put it when it loads. initially, it is empty
 	//useState will keep track of the data and update it on the page while useEffect pulls different data
-	const [weatherData, setWeatherData] = useState({});
+
 
 //-------USE STATES VARIABLES-----------------------------------------------------------
 	//all the states thave have to be tracked. most of them the default value is an empty string 
@@ -25,6 +26,8 @@ function Home(){
 	const[loTemp,setLoTemp] = useState('');
 	const[humidity,setHumidity] = useState('');
 	const[clouds,setClouds] = useState(0);
+	const[weatherType, setWeatherType] = useState("Clear");
+	const [weatherData, setWeatherData] = useState({});
 
 
 
@@ -76,6 +79,8 @@ function Home(){
 
 			let cloudVal = weatherData.clouds.all*0.10;
 			setClouds(cloudVal);
+
+			setWeatherType(weatherData.main.temp);
 		}
 	},[weatherData]);
 	let newCurTemp = kevlvinConvert(curTemp);
@@ -83,6 +88,7 @@ function Home(){
 	return (
 		<div className="Home">
 			<h1 className = 'cityName'>{city}</h1>
+			<WeatherImage weatherType={weatherType}/>
 			<div className="WeatherInfo">
 				<div className='CurrentTemp'>
 					<p className = "CurrentTempLabel">Current Temperature</p>

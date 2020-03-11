@@ -1,0 +1,32 @@
+import React from 'react';
+import {fontAwesomeIcon} from '@fontawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
+//switch looks at the conditions and returns an image. this is helpful because there is a default to fall back on
+//icon is a components but doesnt need to be exported because it is only being used locally
+const Icon= ({weatherType}) => {
+	switch(weatherType) {
+		case 'Cloud': 
+			return <fontAwesomeIcon icon={faCoffee}/>
+		case 'Rain': 
+			return <fontAwesomeIcon icon={faCoffee}/>
+		case 'Clear': 
+			return <fontAwesomeIcon icon={faCoffee}/>
+		case 'Mist': 
+			return <fontAwesomeIcon icon={faCoffee}/>
+		default:
+			return <fontAwesomeIcon icon={faCoffee}/>
+	}
+};
+
+
+function WeatherImage({weatherType}){
+	console.log('weatherType',weatherType);
+		return(
+		<div className = "weatherImage">
+			<Icon weatherType={weatherType}/>
+		</div>
+	)
+}
+
+export default WeatherImage;
