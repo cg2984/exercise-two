@@ -74,17 +74,16 @@ useEffect(() => {
 			setLoTemp(weatherData.main.temp_max);
 			setHumidity(weatherData.main.humidity);
 			setWind(weatherData.wind.speed);
-
-			let cloudVal = weatherData.clouds.all*0.10;
-			setClouds(cloudVal);
-
 			setWeatherType(weatherData.main.temp);
+			setClouds(weatherData.clouds.all);
 		}
 	},[weatherData]);
 	
 	console.log("weather data", weatherData);
+	console.log("clouds", clouds);
+	let newCloud = [194, 241, 255];
 	return (
-		<div className="Home">
+		<div style={{backgroundColor:`${newCloud[0]},${newCloud[1]},${newCloud[2]}`}} className="Home">
 			<h1 className = 'cityName'>{city}</h1>
 			<div className="WeatherInfo">
 				<div className="Temp">
