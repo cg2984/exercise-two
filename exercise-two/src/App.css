@@ -1,18 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic|Knewave|Pangolin&display=swap');
+p{
+  font-family: 'Pangolin', sans-serif;
+}
+a{
+  font-family: 'Knewave', cursive;
+}
+h1{
+  font-family: 'Knewave', cursive;
+}
+
+.cityNav{
+  padding:15px;
+  background-color:white;
+  text-decoration: none;
+  text-transform:uppercase;
+  color:black;
+}
+
+.cityNav:hover{
+  color:#6f777a;
+  border-bottom:5px black dotted;
+  padding:15px;
+}
+
+.CurrentTemp{
+  padding:25px;
+  text-align:right;
+}
+
 .SiteWrapper{
   /*this makes it easy for the website to fit multiple screens and be responsive*/
   max-width:1080px;
-  margin:0 auto;
-  padding:0 25px;
+  margin:20px auto;
   width:100%;
+  height:100%;
 }
 
 .Home{
-  margin:0 auto;
+  margin:20px auto;
   max-width:640px;
+  padding:10px 200px;
+  background-color:white;
+  border:5px black dotted;
 }
 
 .Home h1{
   text-align:center;
+}
+
+.Header{
+  display:flex;
+  flex-direction:row;
+  align-items:baseline;
+  justify-content:space-between;
 }
 
 .cityName{
@@ -20,6 +60,36 @@
   font-weight: bolder;
   font-size:86px;
   line-height: 86px;
+  margin:10px auto;
+}
+.OtherInfo{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+}
+
+.OtherInfo p{
+  font-size:24px;
+  line-height:24px;
+  margin:20px 10px;
+}
+
+.Temp{
+  display:flex;
+  flex-direction:row;
+  align-content:center;
+  justify-conent:space-between;
+  text-align:center;
+}
+
+.hiLoTemp{
+  display:flex;
+  flex-direction:column;
+  font-size:24px;
+  justify-content: center;
+  margin:10px;
+  text-transform: uppercase;
+  text-align: left;
 }
 
 .WeatherInfo{
@@ -28,31 +98,24 @@
   flex-wrap:nowrap;
   text-align:center;
 }
+
 /*the p is there to override the browsers styling*/
 .WeatherInfo .CurrentTemp p{
   margin:0px;
 }
 
-/*the p is there to override the browsers styling*/
-.WeatherInfo .CurrentTempLabel{
-  font-size:76px;
-}
-
 .WeatherInfo .CurrentTempNumber{
-  font-size:76px;
-  color:#5f6878;
+  font-size:124px;
+  margin:10px;
+  opacity:50%;
 }
 
 .WeatherInfo strong{
-  color: #5f6878;
-  font-weight: bold;
-}
-
-.CitiesNav .active{
-  color:green;
+  color: black;
+  opacity:40%;
 }
 
 .CitiesNav a{
   border-bottom:1px solid transparent;
-  transition: ;
+  text-decoration:none;
 }
