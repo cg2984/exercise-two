@@ -13,15 +13,15 @@ function Home(){
 	//all the states thave have to be tracked. most of them the default value is an empty string
 	//this is the default version of the weather data so that we have somewhere to put it when it loads. initially, it is empty
 	//useState will keep track of the data and update it on the page while useEffect pulls different data 
-	const[city,setCity] = useState('Toronto');
-	const[curTemp,setCurTemp] = useState('50');
-	const[hiTemp,setHiTemp] = useState('55');
-	const[loTemp,setLoTemp] = useState('45');
-	const[humidity,setHumidity] = useState('50');
-	const[clouds,setClouds] = useState(50);
-	const[weatherType, setWeatherType] = useState("Drizzle");
+	const[city,setCity] = useState('');
+	const[curTemp,setCurTemp] = useState('');
+	const[hiTemp,setHiTemp] = useState('');
+	const[loTemp,setLoTemp] = useState('');
+	const[humidity,setHumidity] = useState('');
+	const[clouds,setClouds] = useState(0);
+	const[weatherType, setWeatherType] = useState("");
 	const[weatherData, setWeatherData] = useState({});
-	const[wind, setWind] = useState("20");
+	const[wind, setWind] = useState("");
 
 	//-----------useEffects---------------------------------------------------------
 	//get city from url. only updates when history updates.
@@ -38,7 +38,7 @@ function Home(){
 	// Make a request for the weather by city. gets the city from the useEffect above	
 	useEffect(() => {
 		//this was taken from the axios documentation and is how you do a get request for api
-			axios.get(`api.openweathermap.org/data/2.5/weather?q=${city}&appid=${defaultKey}&units=imperial`)
+			axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${defaultKey}&units=imperial`)
 			  .then(function (response) {
 			    // handle success
 			    console.log(response);
@@ -61,26 +61,21 @@ function Home(){
 		if(weatherData.main){
 			setCurTemp(weatherData.main.temp);
 			setHiTemp(weatherData.main.temp_max);
-			setLoTemp(weatherData.main.temp_max);
+			setLoTemp(weatherData.main.temp_min);
 			setHumidity(weatherData.main.humidity);
 			setWind(weatherData.wind.speed);
-			setWeatherType(weatherData.main.temp);
+			setWeatherType(weatherData.weather[0].main);
 			setClouds(weatherData.clouds.all);
 		}
 	},[weatherData]);
-	
-	console.log("weather data", weatherData);
-	console.log("clouds", clouds);
-	let newCloud = [194, 241, 255];
+
+	let cloudOpacity = (100-clouds)*0.01
+
 	return (
-		<div style={{backgroundColor:`${newCloud[0]},${newCloud[1]},${newCloud[2]}`}} className="Home">
+		<main style={{backgroundColor:`rgb(148, 226, 255, ${cloudOpacity})`}}>
 			<section className = "WeatherHead">
 				<WeatherImage weatherType={weatherType}/>
-				<WeatherImage weatherType={weatherType}/>
-				<WeatherImage weatherType={weatherType}/>
-				<h1 className = 'cityName'>{city}</h1>
-				<WeatherImage weatherType={weatherType}/>
-				<WeatherImage weatherType={weatherType}/>
+				<h1>{city}</h1>
 				<WeatherImage weatherType={weatherType}/>
 			</section>
 			<section className="WeatherInfo">
@@ -88,7 +83,7 @@ function Home(){
 					<div className='CurrentTemp'>
 						<p className = 'CurrentTempNumber'>{curTemp}&#176;</p>
 					</div>
-					<div className = "hiLoTemp">
+					<div className = "HiLoTemp">
 						<p>High Temp: <strong>{hiTemp}&#176;</strong></p>
 						<p>Low Temp: <strong>{loTemp}&#176;</strong></p>
 					</div>
@@ -96,9 +91,11 @@ function Home(){
 				<div className='OtherInfo'>
 					<p>Humidity: <strong>{humidity}%</strong></p>
 					<p>Wind Speed: <strong>{wind}mph</strong></p>
+					<p>Cloud Coverage: <strong>{clouds}%</strong></p>
+					<p>Weather Type: <strong>{weatherType}</strong></p>
 				</div>
 			</section>
-		</div>
+		</main>
 	);
 }
 //on the first render {weatherData.main.humidity} is going to be undefined because on first run weatherData is an empty object
