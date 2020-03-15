@@ -9,10 +9,9 @@ const defaultKey = '8ebb908a1214b17270b0677803502d76'
 function Home(){
 	let history = useHistory();
 
-	//-------USE STATES VARIABLES-----------------------------------------------------------
-	//all the states thave have to be tracked. most of them the default value is an empty string
-	//this is the default version of the weather data so that we have somewhere to put it when it loads. initially, it is empty
-	//useState will keep track of the data and update it on the page while useEffect pulls different data 
+//-------useStates-----------------------------------------------------------
+	//all the states that have to be tracked. most of them the default value is an empty string
+	//useState will keep track of the variables to change and update them on the page. useEffect pulls different data from the api
 	const[city,setCity] = useState('');
 	const[curTemp,setCurTemp] = useState('');
 	const[hiTemp,setHiTemp] = useState('');
@@ -20,22 +19,24 @@ function Home(){
 	const[humidity,setHumidity] = useState('');
 	const[clouds,setClouds] = useState(0);
 	const[weatherType, setWeatherType] = useState("");
+	//this is the default version of the weather data so that we have somewhere to put it when it loads. initially, it is empty
 	const[weatherData, setWeatherData] = useState({});
 	const[wind, setWind] = useState("");
 
-	//-----------useEffects---------------------------------------------------------
-	//get city from url. only updates when history updates.
+//-----------useEffects---------------------------------------------------------
+	//get city from url when someone clicks on the header cities
 	useEffect(() => {
 			let mySearchParams = history.location.search;
 			let urlParams = new URLSearchParams(mySearchParams);
 			//using method get from search params api 
 			let city = urlParams.get('city');
+			//makes sure that tte city exists
 			if(city){
 				setCity(city);
 			}
 	},[history]);
 
-	// Make a request for the weather by city. gets the city from the useEffect above	
+	// Make a request for the weather by city. gets the city from the useEffect above by keeping track of city variable
 	useEffect(() => {
 		//this was taken from the axios documentation and is how you do a get request for api
 			axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${defaultKey}&units=imperial`)
@@ -52,10 +53,11 @@ function Home(){
 			  .finally(function () {
 			    // always executed
 			  });
-	//he little []); thing keeps console.log from updating a ton of times because the brackets have to be there to tell useEffect when to update
-	//if there is nothing in the brackets than the useEffects will only update once
 	}, [city]);
 	
+	//the little []); thing keeps console.log from updating a ton of times because the brackets have to be there to tell useEffect when to update
+	//if there is nothing in the brackets than the useEffects will only update once
+
 	//these are for ensuring that the data is loaded before the website tries to use it
 	useEffect(() => {
 		if(weatherData.main){
@@ -69,6 +71,7 @@ function Home(){
 		}
 	},[weatherData]);
 
+	//makes the cloud coverage a decimal so that I can use it to set the opacity of the background color
 	let cloudOpacity = (100-clouds)*0.01
 
 	return (
@@ -98,7 +101,5 @@ function Home(){
 		</main>
 	);
 }
-//on the first render {weatherData.main.humidity} is going to be undefined because on first run weatherData is an empty object
-//this can fixed by making a useState for the data to make sure that the data exists before we use it
-//can also be fixed with weatherData.main&&weatherDatat.main.humidity
+
 export default Home;

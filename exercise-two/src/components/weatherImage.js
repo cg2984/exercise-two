@@ -11,6 +11,7 @@ import { faCoffee,
 		 faWind} from '@fortawesome/free-solid-svg-icons'
 
 //switch looks at the conditions and returns an image. this is helpful because there is a default to fall back on
+//weatherType is connected to home.js which is connected to the data. cant make it not weatherType
 const Icon= ({weatherType}) => {
 	switch(weatherType) {
 		case 'Clouds': 
@@ -31,13 +32,14 @@ const Icon= ({weatherType}) => {
 			return <FontAwesomeIcon icon={faSmog}/>
 		case 'Haze': 
 			return <FontAwesomeIcon icon={faSmog}/>
-		case 'Tornado': 
+		case weatherType<100: 
 			return <FontAwesomeIcon icon={faWind}/>
 		default:
 			return <FontAwesomeIcon icon={faSun}/>
 	}
 };
 
+//you still have to include weatherType={weatherType} when using the WeatherImage component in home.js because Icon has to know what data to give to the switch
 function WeatherImage({weatherType}){
 	return(
 		<div className = "WeatherImage">
