@@ -12,7 +12,7 @@ function Home(){
 //-------useStates-----------------------------------------------------------
 	//all the states that have to be tracked. most of them the default value is an empty string
 	//useState will keep track of the variables to change and update them on the page. useEffect pulls different data from the api
-	const[city,setCity] = useState('');
+	const[city,setCity] = useState('Oaxaca');
 	const[curTemp,setCurTemp] = useState('');
 	const[hiTemp,setHiTemp] = useState('');
 	const[loTemp,setLoTemp] = useState('');
